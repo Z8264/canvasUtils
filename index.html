@@ -9,31 +9,33 @@
 
   <style>
     body {
-      background: #333;
+      background: #f1f1f1;
     }
 
-    div {
+    /* div {
       position: relative;
       width: 1200px;
       height: 200px;
       margin-bottom: 10px;
       overflow: hidden;
-    }
+    } */
 
-    div canvas {
+    /* div canvas {
       position: absolute;
       left: 50%;
       top: 0;
       margin-left: -600px;
-    }
-
+    } */
   </style>
   <script src="/dist/ca.js"></script>
 </head>
 
 <body>
-  <div style="color:#fff;height:100px;line-height:100px;font-size:24px;">FPS: <span id="fps"></span></div>
+  <div style="height:100px;line-height:100px;font-size:24px;">FPS:
+    <span id="fps"></span>
+  </div>
 
+  <div id="canvas"></div>
 
   <script>
     (function () {
@@ -49,9 +51,11 @@
       }
       loop();
 
-      var a = new CA.Application();
+      var a = new CA.Application({
+        transparent:false
+      });
+      document.getElementById('canvas').appendChild(a.view);
       a.render();
-
     })();
   </script>
 </body>
