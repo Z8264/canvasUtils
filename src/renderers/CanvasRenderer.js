@@ -16,8 +16,6 @@ export default class CanvasRenderer extends SystemRenderer {
 
     const ctx = this.context;
 
-    this.lastObjectRendered = displayObject;
-
     ctx.save();
     ctx.setTransform(1, 0, 0, 1, 0, 0);
 

@@ -35,7 +35,7 @@
     <span id="fps"></span>
   </div>
 
-  <div id="canvas"></div>
+  <div id="canvas" style= "border:1px solid #08c;"></div>
 
   <script>
     (function () {
@@ -51,11 +51,35 @@
       }
       loop();
 
-      var a = new CA.Application({
-        transparent:false
-      });
-      document.getElementById('canvas').appendChild(a.view);
-      a.render();
+      var image = new Image();
+      image.src = '1.png';
+      image.onload = function () {
+        init();
+       
+      }
+
+      function init() {
+        var a = new CA.Application({
+          transparent: false
+        });
+        document.getElementById('canvas').appendChild(a.view);
+        var s = CA.Sprite.from(image);
+        a.stage.addChild(s);
+
+        console.log(a);
+        a.render();
+        
+        var count = 1;
+        a.ticker.add(function(a){
+          if(count > 60) return;
+          count++;
+          console.log(a);
+        })
+
+      }
+
+
+
     })();
   </script>
 </body>

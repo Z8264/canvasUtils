@@ -1,13 +1,13 @@
 const DEFAULT_OPTIONS = {
   view: null,
-  antialias: false,
-  forceFXAA: false,
+  // antialias: false,
+  // forceFXAA: false,
   autoResize: false,
   transparent: false,
   backgroundColor: 0x000000,
-  clearBeforeRender: true,
-  preserveDrawingBuffer: false,
-  roundPixels: false,
+  // clearBeforeRender: true,
+  // preserveDrawingBuffer: false,
+  // roundPixels: false,
   width: 800,
   height: 600,
   legacy: false
