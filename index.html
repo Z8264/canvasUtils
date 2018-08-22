@@ -28,6 +28,7 @@
     } */
   </style>
   <script src="/dist/ca.js"></script>
+  <!-- <script scr = "/dist/ca.min.js"></script> -->
 </head>
 
 <body>
@@ -35,7 +36,7 @@
     <span id="fps"></span>
   </div>
 
-  <div id="canvas" style= "border:1px solid #08c;"></div>
+  <div id="canvas" style="border:1px solid #08c;"></div>
 
   <script>
     (function () {
@@ -55,25 +56,31 @@
       image.src = '1.png';
       image.onload = function () {
         init();
-       
+
       }
 
       function init() {
+        // 应用本身
         var a = new CA.Application({
+          autoStart: false,
           transparent: false
         });
         document.getElementById('canvas').appendChild(a.view);
+        
+        // 元素
         var s = CA.Sprite.from(image);
+
+        s.x = 100;
+        s.y = 100;
+
+        console.log(s.transform);
+        // 舞台
         a.stage.addChild(s);
 
-        console.log(a);
         a.render();
-        
-        var count = 1;
-        a.ticker.add(function(a){
-          if(count > 60) return;
-          count++;
-          console.log(a);
+        // 动画
+        a.ticker.add(function (a) {
+
         })
 
       }

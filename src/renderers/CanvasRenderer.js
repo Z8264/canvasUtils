@@ -25,7 +25,7 @@ export default class CanvasRenderer extends SystemRenderer {
       ctx.fillStyle = this._backgroundColorString;
       ctx.fillRect(0, 0, this.width, this.height);
     }
-
+    displayObject.updateTransform();
     displayObject.renderCanvas(this);
     ctx.restore();
   }

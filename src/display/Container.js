@@ -22,4 +22,15 @@ export default class Container extends DisplayObject {
       this.children[i].renderCanvas(renderer);
     }
   }
+  updateTransform() {
+    this.transform.updateTransform(this.parent.transform);
+
+    for (let i = 0, j = this.children.length; i < j; ++i) {
+      const child = this.children[i];
+
+      if (child.visible) {
+        child.updateTransform();
+      }
+    }
+  }
 }
