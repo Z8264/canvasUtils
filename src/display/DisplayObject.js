@@ -2,6 +2,7 @@ import Transform from "./Transform";
 
 export default class DisplayObject {
   constructor() {
+    this.tempDisplayObjectParent = null;
     this.transform = new Transform();
     this.alpha = 1;
     this.visible = true;
@@ -84,6 +85,13 @@ export default class DisplayObject {
   }
   get worldTransform() {
     return this.transform.worldTransform;
+  }
+  get _tempDisplayObjectParent() {
+    if (this.tempDisplayObjectParent === null) {
+      this.tempDisplayObjectParent = new DisplayObject();
+    }
+
+    return this.tempDisplayObjectParent;
   }
   destroy() {}
 }

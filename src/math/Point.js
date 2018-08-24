@@ -1,5 +1,11 @@
+/**
+ * 点
+ * x - 横坐标
+ * y - 纵坐标
+ * 如果没有设置y，则 y = x
+ */
 export default class Point {
-  constructor(x = 0, y = 0) {
+  constructor(x = 0, y = x) {
     this.x = x;
     this.y = y;
   }
@@ -12,7 +18,7 @@ export default class Point {
   equals(p) {
     return p.x === this.x && p.y === this.y;
   }
-  set(x = 0, y = 0) {
+  set(x = 0, y = x) {
     this.x = x;
     this.y = y;
   }

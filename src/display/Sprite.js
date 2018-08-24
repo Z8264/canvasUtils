@@ -16,6 +16,7 @@ export default class Sprite extends Container {
     let wt = this.transform.worldTransform;
     let dx = 0;
     let dy = 0;
+
     renderer.context.setTransform(
       wt.a,
       wt.b,

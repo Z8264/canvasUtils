@@ -56,32 +56,32 @@
       image.src = '1.png';
       image.onload = function () {
         init();
-
       }
 
       function init() {
         // 应用本身
         var a = new CA.Application({
-          autoStart: false,
+          autoStart: true,
           transparent: false
         });
         document.getElementById('canvas').appendChild(a.view);
-        
+
         // 元素
         var s = CA.Sprite.from(image);
 
         s.x = 100;
         s.y = 100;
-
-        console.log(s.transform);
+        
         // 舞台
         a.stage.addChild(s);
 
-        a.render();
+
         // 动画
         a.ticker.add(function (a) {
-
+          s.x += a;
         })
+
+  
 
       }
 

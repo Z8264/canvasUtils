@@ -1,3 +1,5 @@
+import Container from "../display/Container";
+
 const DEFAULT_OPTIONS = {
   view: null,
   // antialias: false,
@@ -31,6 +33,10 @@ export default class SystemRenderer {
     this.view = document.createElement("canvas");
 
     this.transparent = options.transparent;
+
+    this.resolution = 1;
+
+    this._tempDisplayObjectParent = new Container();
 
     this._backgroundColorString = "#000000";
   }

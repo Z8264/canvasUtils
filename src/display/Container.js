@@ -11,6 +11,10 @@ export default class Container extends DisplayObject {
         this.addChild(arguments[i]);
       }
     } else {
+      if (child.parent) {
+        child.parent.removeChild(child);
+      }
+      child.parent = this;
       this.children.push(child);
     }
     return child;

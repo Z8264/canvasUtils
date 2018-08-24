@@ -25,7 +25,13 @@ export default class CanvasRenderer extends SystemRenderer {
       ctx.fillStyle = this._backgroundColorString;
       ctx.fillRect(0, 0, this.width, this.height);
     }
+    // 更新worldtransform
+    const cacheParent = displayObject.parent;
+    displayObject.parent = this._tempDisplayObjectParent;
     displayObject.updateTransform();
+    displayObject.parent = cacheParent;
+
+    // 调用渲染方法
     displayObject.renderCanvas(this);
     ctx.restore();
   }
