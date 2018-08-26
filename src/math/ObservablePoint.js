@@ -1,8 +1,9 @@
 /**
- * 可添加回调函数的"点"对象，当位置改变调用该函数
+ * 可注册事件的点
+ * 添加回调函数的"点"对象，当位置改变调用该函数
  */
 export default class ObservablePoint {
-  constructor(cb = () => {}, scope, x = 0, y = 0) {
+  constructor(cb = () => { }, scope, x = 0, y = 0) {
     this._x = x;
     this._y = y;
     this.cb = cb;
@@ -39,7 +40,7 @@ export default class ObservablePoint {
   get y() {
     return this._y;
   }
-  
+
   set y(y) {
     if (this._y !== y) {
       this._y = y;
