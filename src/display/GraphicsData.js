@@ -21,8 +21,7 @@ export default class GraphicsData
     constructor(lineWidth, lineColor, lineAlpha, fillColor, fillAlpha, fill, nativeLines, shape, lineAlignment)
     {
         /**
-         * the width of the line to draw
-         * @member {number}
+         * 线宽
          */
         this.lineWidth = lineWidth;
 

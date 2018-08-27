@@ -1,11 +1,8 @@
 /**
  * 点
- * x - 横坐标
- * y - 纵坐标
- * 如果没有设置y，则 y = x
  */
 export default class Point {
-  constructor(x = 0, y = x) {
+  constructor(x = 0, y = 0) {
     this.x = x;
     this.y = y;
   }

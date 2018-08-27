@@ -2,7 +2,7 @@ import Container from "../display/Container";
 
 const DEFAULT_OPTIONS = {
   view: null,
-  // antialias: false,
+  antialias: false, // 抗锯齿，平滑 /'ænti'eiliəs/
   // forceFXAA: false,
   autoResize: false,
   transparent: false,

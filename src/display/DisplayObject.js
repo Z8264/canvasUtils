@@ -1,5 +1,8 @@
 import Transform from "./Transform";
-
+/**
+ * 渲染基础类
+ * 抽象类，只能继承(extends)不能直接使用
+ */
 export default class DisplayObject {
   constructor() {
     this.tempDisplayObjectParent = null;
@@ -13,6 +16,13 @@ export default class DisplayObject {
     this._filters = null;
     this._enabledFilters = null;
 
+    this.bounds = new Bounds();
+    this.boundsId = 0;
+    this._lastBoundsID = -1;
+    this._boundsRect = null;
+    this._localBoundsRect = null;
+
+    this._mask = null;
     this._destroyed = false;
   }
   get _tempDisplayObjectParent() {}

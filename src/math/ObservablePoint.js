@@ -1,5 +1,4 @@
 /**
- * 可注册事件的点
  * 添加回调函数的"点"对象，当位置改变调用该函数
  */
 export default class ObservablePoint {

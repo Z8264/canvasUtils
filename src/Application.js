@@ -2,7 +2,7 @@ import CanvasRenderer from "./renderers/CanvasRenderer";
 import Container from "./display/Container";
 import Ticker from "./ticker/Ticker";
 export default class Application {
-  constructor(options, arg2, arg3, argr, arg5) {
+  constructor(options, arg2, arg3, arg4, arg5) {
     /**
      *
      */
@@ -10,7 +10,7 @@ export default class Application {
       options = Object.assign(
         {
           width: options,
-          height: arg2 || settings.RENDER_OPTIONS.height,
+          height: arg2 || 600,
           forceCanvas: !!arg4,
           sharedTicker: !!arg5
         },
