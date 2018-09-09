@@ -1,5 +1,12 @@
+/**
+ * 事件监听链表
+ * @private
+ */
 export default class TickerListener {
   constructor(fn, context = null, priority = 0, once = false) {
+    /**
+     * 需要执行的处理函数
+     */
     this.fn = fn;
     this.context = context;
     this.priority = priority;
@@ -8,9 +15,19 @@ export default class TickerListener {
     this.previous = null;
     this._destroyed = false;
   }
+  /**
+   * match
+   * @param {Function} fn 
+   * @param {Function} context 
+   * @return {boolean} 
+   */
   match(fn, context = null) {
     return this.fn === fn && this.context === context;
   }
+  /**
+   * emit
+   * @param {number} deltaTime 时间增量
+   */
   emit(deltaTime) {
     if (this.fn) {
       if (this.context) {
@@ -28,18 +45,28 @@ export default class TickerListener {
     }
     return redirect;
   }
-  connect(previous) {
-    this.previous = previous;
-    if (previous.next) {
-      previous.next.previous = this;
+  /**
+   * connect
+   * @param {TickerListener} listener 
+   */
+  connect(listener) {
+    this.previous = listener;
+    if (listener.next) {
+      listener.next.previous = this;
     }
-    this.next = previous.next;
-    previous.next = this;
+    this.next = listener.next;
+    listener.next = this;
   }
+  /**
+   * destroy
+   * @param {boolean} hard 
+   */
   destroy(hard = false) {
-    this._destroyed = true;
+    // 销毁内容
     this.fn = null;
     this.context = null;
+    this._destroyed = true;
+    // 重新链接
     if (this.previous) {
       this.previous.next = this.next;
     }

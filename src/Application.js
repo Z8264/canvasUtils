@@ -4,7 +4,7 @@ import Ticker from "./ticker/Ticker";
 export default class Application {
   constructor(options, arg2, arg3, arg4, arg5) {
     /**
-     *
+     * options
      */
     if (typeof options === "number") {
       options = Object.assign(
@@ -27,12 +27,21 @@ export default class Application {
       },
       options
     );
-
+    /**
+     * renderer
+     */
     this.renderer = new CanvasRenderer(options);
+    /**
+     * stage 舞台
+     */
     this.stage = new Container();
-    this._ticker = null;
+    /**
+     * ticker 循环器
+     */
     this.ticker = new Ticker();
-    // start th rendering
+
+    this._ticker = null;
+
     if (options.autoStart) {
       this.start();
     }
@@ -40,11 +49,11 @@ export default class Application {
   get view() {
     return this.renderer.view;
   }
-  get ticker() {
-    return this._ticker;
-  }
   get screen() {
     return this.renderer.screen;
+  }
+  get ticker() {
+    return this._ticker;
   }
   set ticker(ticker) {
     if (this._ticker) {
@@ -52,6 +61,7 @@ export default class Application {
     }
     this._ticker = ticker;
     if (ticker) {
+      //优先级：-25
       ticker.add(this.render, this, -25);
     }
   }
@@ -65,6 +75,21 @@ export default class Application {
     this._ticker.start();
   }
   destory() {
-    console.log("Destroy and don't use after this");
+    // options
+    this._options = null;
+    // ticker
+    if (this._ticker) {
+      const oldTicker = this._ticker;
+
+      this.ticker = null;
+      oldTicker.destroy();
+    }
+    // stage
+    this.stage.destroy(stageOptions);
+    this.stage = null;
+    // renderer
+    this.renderer.destroy(removeView);
+    this.renderer = null;
+
   }
 }

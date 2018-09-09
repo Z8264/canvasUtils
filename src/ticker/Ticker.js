@@ -69,6 +69,9 @@ export default class Ticker {
   add(fn, context, priority = 100) {
     return this._addListener(new TickerListener(fn, context, priority));
   }
+  addonce(){
+    
+  }
   update(currentTime = performance.now()) {
     let elapsedMS;
     if (currentTime > this.lastTime) {
