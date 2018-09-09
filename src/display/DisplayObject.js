@@ -1,4 +1,5 @@
 import Transform from "./Transform";
+import Bounds from "./Bounds";
 /**
  * 渲染基础类
  * 抽象类，只能继承(extends)不能直接使用
