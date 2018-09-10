@@ -13,8 +13,10 @@ export default class CanvasRenderer extends SystemRenderer {
   render(displayObject) {
     if (!this.view) return;
 
+    // ctx
     const ctx = this.context;
 
+    // ctx - save
     ctx.save();
     ctx.setTransform(1, 0, 0, 1, 0, 0);
 
@@ -34,6 +36,8 @@ export default class CanvasRenderer extends SystemRenderer {
 
     // 调用渲染方法renderCanvas
     displayObject.renderCanvas(this);
+
+    // ctx - restore
     ctx.restore();
   }
   clear() {}

@@ -1,5 +1,5 @@
 /**
- * 事件监听链表
+ * Ticker事件监听链表，用来处理Ticker事件的优先级
  * @private
  */
 export default class TickerListener {
@@ -8,6 +8,9 @@ export default class TickerListener {
      * 需要执行的处理函数
      */
     this.fn = fn;
+    /**
+     * scope
+     */
     this.context = context;
     this.priority = priority;
     this.once = once;
@@ -17,9 +20,9 @@ export default class TickerListener {
   }
   /**
    * match
-   * @param {Function} fn 
-   * @param {Function} context 
-   * @return {boolean} 
+   * @param {Function} fn
+   * @param {Function} context
+   * @return {boolean}
    */
   match(fn, context = null) {
     return this.fn === fn && this.context === context;
@@ -47,7 +50,7 @@ export default class TickerListener {
   }
   /**
    * connect
-   * @param {TickerListener} listener 
+   * @param {TickerListener} listener
    */
   connect(listener) {
     this.previous = listener;
@@ -59,7 +62,7 @@ export default class TickerListener {
   }
   /**
    * destroy
-   * @param {boolean} hard 
+   * @param {boolean} hard
    */
   destroy(hard = false) {
     // 销毁内容

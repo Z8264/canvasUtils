@@ -7,12 +7,28 @@ export default class Ticker {
     this._maxElapsedMS = 100;
 
     this.autoStart = false;
-
+    /**
+     * 时间增量
+     * @default 1
+     */
     this.deltaTime = 1;
-
+    /**
+     * 速度
+     * @default 1/0.06
+     */
     this.speed = 1;
-
+    /**
+     * 是否开始
+     * @default false
+     */
     this.started = false;
+    this.elapsedMS = 1 / 0.06;
+    this.lastTime = -1;
+
+    /**
+     *
+     * @param {number} time
+     */
     this._tick = time => {
       this._requestId = null;
 
@@ -66,12 +82,15 @@ export default class Ticker {
       return this;
     }
   }
+  
   add(fn, context, priority = 100) {
     return this._addListener(new TickerListener(fn, context, priority));
   }
-  addonce(){
-    
+
+  addOnce() {
+    return this._addListener(new TickerListener(fn, context, priority, true));
   }
+
   update(currentTime = performance.now()) {
     let elapsedMS;
     if (currentTime > this.lastTime) {
@@ -94,16 +113,31 @@ export default class Ticker {
     }
     this.lastTime = currentTime;
   }
+
   start() {
     if (!this.started) {
       this.started = true;
       this._requestIfNeeded();
     }
   }
+  
   stop() {
     if (this.started) {
       this.started = false;
       this._cancelIfNeeded();
     }
+  }
+
+  get FPS() {
+    return 1000 / this.elapsedMS;
+  }
+
+  get minFPS(){
+    return 1000/ this._maxElapsedMS;
+  }
+
+  set minFPS(){
+    const minFPMS = Math.min(Math.max(0, fps) / 1000, 0.06);
+    this._maxElapsedMS = 1/minFPMS;
   }
 }
