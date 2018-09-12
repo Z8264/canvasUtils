@@ -1,5 +1,7 @@
 import TickerListener from "./TickerListener";
-
+/**
+ * 定时器
+ */
 export default class Ticker {
   constructor() {
     this._head = new TickerListener(null, null, Infinity);
@@ -33,7 +35,7 @@ export default class Ticker {
       this._requestId = null;
 
       if (this.started) {
-        this.update(time);
+        this.updata(time);
         if (this.started && this._requestId === null && this._head.next) {
           this._requestId = requestAnimationFrame(this._tick);
         }
@@ -82,16 +84,31 @@ export default class Ticker {
       return this;
     }
   }
-  
+
   add(fn, context, priority = 100) {
     return this._addListener(new TickerListener(fn, context, priority));
   }
 
-  addOnce() {
+  addOnce(fn, context, priority = 100) {
     return this._addListener(new TickerListener(fn, context, priority, true));
   }
 
-  update(currentTime = performance.now()) {
+  remove(fn, context) {
+    let listener = this._head.next;
+    while (listener) {
+      if (listener.match(fn, context)) {
+        listener = listener.destroy();
+      } else {
+        listener = listener.next;
+      }
+    }
+    if (!this._head.next) {
+      this._cancelIfNeeded();
+    }
+    return this;
+  }
+
+  updata(currentTime = performance.now()) {
     let elapsedMS;
     if (currentTime > this.lastTime) {
       elapsedMS = this.elapsedMS = currentTime - this.lastTime;
@@ -120,7 +137,7 @@ export default class Ticker {
       this._requestIfNeeded();
     }
   }
-  
+
   stop() {
     if (this.started) {
       this.started = false;
@@ -132,12 +149,12 @@ export default class Ticker {
     return 1000 / this.elapsedMS;
   }
 
-  get minFPS(){
-    return 1000/ this._maxElapsedMS;
+  get minFPS() {
+    return 1000 / this._maxElapsedMS;
   }
 
-  set minFPS(){
+  set minFPS(fps) {
     const minFPMS = Math.min(Math.max(0, fps) / 1000, 0.06);
-    this._maxElapsedMS = 1/minFPMS;
+    this._maxElapsedMS = 1 / minFPMS;
   }
 }

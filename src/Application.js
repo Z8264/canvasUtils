@@ -35,12 +35,14 @@ export default class Application {
      * stage 舞台
      */
     this.stage = new Container();
+    
     /**
      * ticker 循环器
      */
+    this._ticker = null;
     this.ticker = new Ticker();
 
-    this._ticker = null;
+    
 
     if (options.autoStart) {
       this.start();

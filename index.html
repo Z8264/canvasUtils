@@ -32,8 +32,11 @@
 </head>
 
 <body>
-  <div style="height:100px;line-height:100px;font-size:24px;">FPS:
+  <div style="line-height:50px;font-size:18px;">
+    FPS:
     <span id="fps"></span>
+    time:
+    <span id="time"></span>
   </div>
 
   <div id="canvas" style="border:1px solid #08c;"></div>
@@ -41,16 +44,16 @@
   <script>
     (function () {
 
-      var fps = 0;
-      var st = new Date(), et;
-      var fpsDom = document.getElementById('fps');
-      function loop() {
-        requestAnimationFrame(loop);
-        et = new Date();
-        fps++;
-        if (et - st >= 1000) { fpsDom.innerHTML = fps; st = et; fps = 0; }
-      }
-      loop();
+      // var fps = 0;
+      // var st = new Date(), et;
+      // var fpsDom = document.getElementById('fps');
+      // function loop() {
+      //   requestAnimationFrame(loop);
+      //   et = new Date();
+      //   fps++;
+      //   if (et - st >= 1000) { fpsDom.innerHTML = fps; st = et; fps = 0; }
+      // }
+      // loop();
 
       var image = new Image();
       image.src = '1.png';
@@ -86,9 +89,6 @@
         graphics.lineTo(50, 50);
         graphics.endFill();
 
-  
-
-
         // 舞台
         a.stage.addChild(s);
         a.stage.addChild(graphics);
@@ -100,12 +100,41 @@
         })
 
 
-
       }
 
 
 
     })();
+  </script>
+
+  <script>
+    // 测试Ticker
+
+
+    const t = new CA.Ticker();
+    const fpsDom = document.getElementById('fps');
+    const timeDom = document.getElementById('time');
+
+    t.add(function (a) {
+      fpsDom.innerHTML = t.FPS;
+    }, null, 100)
+
+    function updateTime(a) {
+
+      timeDom.innerHTML = a;
+    }
+
+    t.add(updateTime, null, 101);
+    t.start();
+
+    setTimeout(() => {
+      t.remove(updateTime);
+      // t.stop();
+    }, 3000);
+
+
+
+
   </script>
 </body>
 
