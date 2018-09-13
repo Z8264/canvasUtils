@@ -7,40 +7,57 @@ import Bounds from "./Bounds";
 export default class DisplayObject {
   constructor() {
     this.tempDisplayObjectParent = null;
+    /**
+     * transform
+     */
     this.transform = new Transform();
+    /**
+     * 透明度
+     */
     this.alpha = 1;
+    /**
+     * 是否可见
+     * 如果设置为false，该对象将不被渲染
+     */
     this.visible = true;
-    this.renderable = true;
+    /**
+     * 父容器
+     * @member {Container}
+     */
     this.parent = null;
+    /**
+     * 实际显示的透明度 = 本身透明度乘以父容器透明度
+     */
     this.worldAlpha = 1;
-    this.filterArea = null;
-    this._filters = null;
-    this._enabledFilters = null;
 
-    this.bounds = new Bounds();
-    this.boundsId = 0;
-    this._lastBoundsID = -1;
-    this._boundsRect = null;
-    this._localBoundsRect = null;
+    /**
+     * filter
+     */
+    // this.filterArea = null;
+    // this._filters = null;
+    // this._enabledFilters = null;
 
-    this._mask = null;
-    this._destroyed = false;
+    /**
+     * bounds
+     */
+    // this.bounds = new Bounds();
+    // this.boundsId = 0;
+    // this._lastBoundsID = -1;
+    // this._boundsRect = null;
+    // this._localBoundsRect = null;
+
+    /**
+     * mask
+     */
+    // this._mask = null;
+    // this._destroyed = false;
   }
-  get _tempDisplayObjectParent() {}
+
+  /**
+   * update transform
+   * 在 container 中被复写
+   */
   updateTransform() {}
-  _recursivePostUpdateTransform() {}
-  getBounds() {}
-  getLocalBounds() {}
-  toGlobal() {}
-  toLocal() {}
-  renderWebGL() {}
-  setParent(container) {
-    if (!container || !container.addChild) {
-      throw new Error("setParent: Argument must be a Container");
-    }
-    container.addChild(this);
-    return container;
-  }
 
   renderCanvas(renderer) {}
   setTransform(
@@ -54,23 +71,15 @@ export default class DisplayObject {
     pivotX = 0,
     pivotY = 0
   ) {
-    this.position = {
-      x: x,
-      y: y
-    };
-    this.scale = {
-      x: scaleX,
-      y: scaleY
-    };
+    this.position.x = x;
+    this.position.y = y;
+    this.scale.x = scaleX;
+    this.scale.y = scaleY;
     this.rotation = rotation;
-    this.skew = {
-      x: skewX,
-      y: skewY
-    };
-    this.pivot = {
-      x: pivotX,
-      y: pivotY
-    };
+    this.skew.x = skewX;
+    this.skew.y = skewY;
+    this.pivot.x = pivotX;
+    this.pivot.y = pivotY;
     return this;
   }
   get x() {
@@ -91,6 +100,18 @@ export default class DisplayObject {
   set scale(value) {
     this.transform.scale.copy(value);
   }
+  get rotation() {
+    return this.transform.rotation;
+  }
+  set rotation(value) {
+    this.transform.rotation = value;
+  }
+  get pivot() {
+    return this.transform.pivot;
+  }
+  set pivot(value) {
+    this.transform.pivot.copy(value);
+  }
   get position() {
     return this.transform.position;
   }
@@ -105,4 +126,13 @@ export default class DisplayObject {
     return this.tempDisplayObjectParent;
   }
   destroy() {}
+
+  // get _tempDisplayObjectParent() {}
+  // _recursivePostUpdateTransform() {}
+  // getBounds() {}
+  // getLocalBounds() {}
+  // toGlobal() {}
+  // toLocal() {}
+  // setParent(container) {}
+  // renderWebGL() {}
 }

@@ -72,8 +72,8 @@
         // 元素
         var s = CA.Sprite.from(image);
 
-        s.x = 100;
-        s.y = 100;
+        s.x = 200;
+        s.y = 200;
 
         // tuxing
         var graphics = new CA.Graphics();
@@ -95,11 +95,11 @@
 
         a.render();
         // 动画
+        // console.log(s.width,s.height);
         a.ticker.add(function (a) {
-          s.x += a;
+          // s.x += a;
+          s.rotation += 0.01 * a;
         })
-
-
       }
 
 

@@ -1,15 +1,28 @@
 import SystemRenderer from "./SystemRenderer";
 
 export default class CanvasRenderer extends SystemRenderer {
-  constructor(options, arg2, arg3) {
-    super("canvas", options, arg2, arg3);
-
-    this.rootContext = this.view.getContext("2d", { alpha: this.transparent });
-
-    this.context = this.rootContext;
-
+  /**
+   * @param {number}  [options.width] - 屏幕宽度
+   * @param {number}  [options.height] - 屏幕高度
+   * @param {number}  [options.resolution = 1] - 分辨率
+   * @param {boolean} [options.transparent = false] - 背景是否透明
+   * @param {number}  [options.backgroundColor = 0X000000] - 背景颜色
+   */
+  constructor(options) {
+    super(options);
+    /**
+     * context
+     */
+    this.context = this.view.getContext("2d", { alpha: this.transparent });
+    /**
+     * resize
+     */
     this.resize(this.options.width, this.options.height);
   }
+  /**
+   * 渲染 displayObject
+   * @param {DisplayObject} displayObject
+   */
   render(displayObject) {
     if (!this.view) return;
 
@@ -40,5 +53,6 @@ export default class CanvasRenderer extends SystemRenderer {
     // ctx - restore
     ctx.restore();
   }
-  clear() {}
+  clear(clearColor) {}
+  destroy() {}
 }
